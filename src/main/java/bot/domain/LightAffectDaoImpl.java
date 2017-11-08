@@ -12,4 +12,9 @@ public class LightAffectDaoImpl implements LightAffectDao {
     public LightAffectDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+
+
+
+
 }
