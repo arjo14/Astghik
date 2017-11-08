@@ -1,0 +1,17 @@
+messenger4j:
+  appSecret: '282086075520438c3445e61af0f53ec7'
+  verifyToken : 'message'
+  pageAccessToken: 'EAAbpR7r4ahYBADas69ZC7KsuOrNd9IiVCCDWZAxjni3MQZB9JkYX3U7GWEklzVBCdg6JIhLR0IXg1TIRkAWtCppXMWVi6x7pW55o1a2cf6GZANQOnm2WWKZArMMP6Vji84w2kPPkvhen4kAoASa67K6ArWfV1ZCOsxTVgZC5f2OKQZDZD'
+
+logging:
+  level:
+    com:
+      github:
+        messenger4j: INFO
+server:
+    port: '8082'
+
+
+
+
+
