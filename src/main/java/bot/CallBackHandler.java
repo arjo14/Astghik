@@ -10,12 +10,10 @@ import com.github.messenger4j.receive.events.AccountLinkingEvent;
 import com.github.messenger4j.receive.handlers.*;
 import com.github.messenger4j.send.MessengerSendClient;
 import com.github.messenger4j.send.NotificationType;
-import com.github.messenger4j.send.QuickReply;
 import com.github.messenger4j.send.Recipient;
 import com.github.messenger4j.send.buttons.Button;
+import com.github.messenger4j.send.buttons.PostbackButton;
 import com.github.messenger4j.send.templates.GenericTemplate;
-import com.github.messenger4j.user.UserProfile;
-import com.github.messenger4j.user.UserProfileClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,7 @@ import java.util.List;
 public class CallBackHandler {
 
     @Autowired
-    private LightAffectDao lightAffectDao;
+    private Astghik astghik;
 
     private static final Logger logger = LoggerFactory.getLogger(CallBackHandler.class);
 
@@ -120,13 +118,34 @@ public class CallBackHandler {
             if(messageText.toLowerCase().equals("barev")){
                 sendTextMessage(senderId,"Barev exbayr");
             }
-            else if(messageText.toLowerCase().equals("Hajox")){
+            else if(messageText.toLowerCase().equals("hajox")){
                 sendTextMessage(senderId,"Hajox exbayr");
+            }
+            else if(messageText.toLowerCase().equals("Astgh")|| messageText.toLowerCase().contains("help")){
+                List<Weekday> weekdays= astghik.getWeekdays();
+                Button.ListBuilder builder = Button.newListBuilder();
+                for (Weekday weekday:weekdays){
+                    builder.addPostbackButton(weekday.getName(), String.valueOf(Integer.valueOf(weekday.getId())));
+
+                }
+
+
+                GenericTemplate genericTemplate = GenericTemplate.newBuilder().addElements().addElement("Ընտրի բռատ").buttons(builder.build()).toList().done().build();
+                try {
+                    this.sendClient.sendTemplate(senderId, genericTemplate);
+                } catch (MessengerApiException | MessengerIOException e) {
+                    e.printStackTrace();
+                }
             }
             else{
                 sendTextMessage(senderId,"i don't understand you bro");
             }
         };
+    }
+
+    private List<Schedule> getScheduleByWeekdayAndGroupId(int groupId,int weekdayId){
+
+        return astghik.getScheduleByWeekday(weekdayId,groupId);
     }
 
 

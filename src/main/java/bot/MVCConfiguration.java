@@ -1,8 +1,8 @@
 package bot;
 
 
-import bot.domain.LightAffectDao;
-import bot.domain.LightAffectDaoImpl;
+import bot.domain.Astghik;
+import bot.domain.AstghikImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -27,7 +27,7 @@ public class MVCConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LightAffectDao getContactDAO() {
-        return new LightAffectDaoImpl(getDataSource());
+    public Astghik getContactDAO() {
+        return new AstghikImpl(getDataSource());
     }
 }
